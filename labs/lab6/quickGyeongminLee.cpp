@@ -1,3 +1,6 @@
+// Honor Code : On my honor, I pledge that I have neither received nor provided improper assistance in the completion of this assignment.
+// Signed: 이경민, Student number: 22100487, Class: 02
+
 // quicksort algorithm
 //
 // A quicksort algorithm - its time complexity is O(n^2).
@@ -56,6 +59,38 @@ int partition(int list[], int lo, int hi)
 	return (i + 1); // returns the new pivot index which it is now in place or sorted.
 }
 
+bool more(int x, int y)
+{
+	if (x > y)
+		return true;
+	else
+		return false;
+}
+
+bool less(int x, int y)
+{
+	if (x < y)
+		return true;
+	else
+		return false;
+}
+
+void quicksort(int *list, int n, bool(comp)(int, int))
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		bool swapped = false;
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (comp(list[j + 1], list[j]))
+			{
+				swapped = true;
+				swap(list[j + 1], list[j]);
+			}
+		}
+	}
+}
+
 // quicksort helper function for recursive operation
 // list[]: array to be sorted, lo: Starting index, h: Ending index
 // N is added only for debugging or DPRINT
@@ -72,14 +107,15 @@ void quicksort(int *list, int lo, int hi, int n)
 	}
 }
 
-void quicksort(int *a, int n, bool (*comp)(int, int))
+void quicksort(int *a, int n)
 {
 	DPRINT(cout << "QUICK SORTING...\n");
 	quicksort(a, 0, n - 1, n); // the last argument n is added only for DPRINT()
 }
 
-#if 0
-#include "sort.h"
+#if 1
+
+void insertionsort(int *list, int n, bool(comp)(int, int) = ::less);
 
 int main()
 {
@@ -102,10 +138,10 @@ int main()
 	// Uncomment the next line and modify the code above to make it work.
 	quicksort(list, N, more);
 	cout << "QUICK SORTED using more fp: " << endl;
-	// Using printlist()
-	printlist(list, N);
-	// for (auto x: list) cout << x << "  ";
-	// cout << endl << endl;
+	for (auto x : list)
+		cout << x << "  ";
+	cout << endl
+		 << endl;
 
 	cout << "Happy Coding~~";
 	return 0;

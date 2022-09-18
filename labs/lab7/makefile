@@ -2,7 +2,7 @@
 # Signed: 이경민, Student number: 22100487, Class: 02
 
 qsort: quick.o comparator.o printlist.o
-	g++ -std=c++11 quick.o comparator.o printlist.o -o qsort
+	g++ quick.o comparator.o printlist.o -o qsort
 quick.o: quick.cpp
 	g++ -c quick.cpp -I../../include
 comparator.o: comparator.cpp

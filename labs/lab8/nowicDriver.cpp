@@ -2,18 +2,23 @@
 #include <iostream>
 #include "nowic.h"
 
-int main() {
-  int i = GetInt("My GetInt prompt: ");
-  std::cout << "i=" << i << "==" << std::endl;
+#if 1
 
-  double x = GetDouble();
-  std::cout << "x=" << x << "==" << std::endl;
+int main()
+{
+	int i = GetInt("My GetInt prompt: ");
+	std::cout << "i=" << i << "==" << std::endl;
 
-  char ch = GetChar();
-  std::cout << "ch=" << ch << "==" << std::endl;
+	double x = GetDouble();
+	std::cout << "x=" << x << "==" << std::endl;
 
-  std::string str = GetString("My GetString prompt: ");
-  std::cout << "str=" << str << "==" << std::endl;
+	char ch = GetChar();
+	std::cout << "ch=" << ch << "==" << std::endl;
 
-  std::cout << "Happy Coding~~\n";
+	std::string str = GetString("My GetString prompt: ");
+	std::cout << "str=" << str << "==" << std::endl;
+
+	std::cout << "Happy Coding~~\n";
 }
+
+#endif

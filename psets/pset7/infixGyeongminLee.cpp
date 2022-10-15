@@ -58,18 +58,14 @@ struct stack
 		return item.back();
 	}
 };
+
 #else /////////////////////////// using STL stack //////////////////////////
 #include <stack>
-#include <cmath>
 #endif ///////////////////////////////////////////////////////////////////////
 
 template <typename T>
 void printStack(stack<T> orig)
 {
-
-	// cout << "Step 2: your code here: copy printStack() template version from postfix.cpp\n";
-	// cout << "Step 3: rewrite printStack() using recursion. refer to PDF file\n";
-
 	if (orig.size() == 1)
 	{
 		cout << orig.top() << ' ';
@@ -98,8 +94,6 @@ double apply_op(double a, double b, char op)
 		return a * b;
 	case '/':
 		return a / b;
-	case '^':
-		return pow(a, b);
 	}
 	cout << "Unsupported operator encountered: " << op << endl;
 	return 0;
@@ -140,7 +134,6 @@ double evaluate(string tokens)
 		if (isdigit(tokens[i]))
 		{
 			int ivalue = 0;
-			// cout << "your code here: to handle multi-digits(operand)\n";
 			ivalue = tokens[i] - '0';
 			if (n == 1)
 			{
@@ -171,12 +164,12 @@ double evaluate(string tokens)
 
 	for (int i = 0; i < op_stack.size(); i++)
 	{
-		char ot = op_stack.top();
-		op_stack.pop();
 		double temp1 = va_stack.top();
 		va_stack.pop();
 		double temp2 = va_stack.top();
 		va_stack.pop();
+		char ot = op_stack.top();
+		op_stack.pop();
 
 		if (ot == '+')
 		{
@@ -198,11 +191,6 @@ double evaluate(string tokens)
 			va_stack.push(temp2 / temp1);
 			break;
 		}
-		else if (ot == '^')
-		{
-			va_stack.push(pow(temp2, temp1));
-			break;
-		}
 		else
 			break;
 	}
@@ -211,9 +199,11 @@ double evaluate(string tokens)
 	DPRINT(printStack(va_stack); cout << endl;);
 	DPRINT(printStack(op_stack); cout << endl;);
 
-	// assert(op_stack.empty());
 	if (!op_stack.empty())
+	{
 		printf("\n");
+		assert(op_stack.empty());
+	}
 	value = va_stack.top();
 	va_stack.pop();
 

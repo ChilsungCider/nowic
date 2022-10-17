@@ -1,7 +1,8 @@
-// Honor Code : On my honor, I pledge that I have neither received nor provided improper assistance in the completion of this assignment.
-// Signed: 이경민, Student number: 22100487, Class: 02
+// On my honor, I pledge that I have neither received nor provided improper
+// assistance in the completion of this assignment.
+// assigned: 박진우 class: 02 student number: 22100311
 
-// infix.cpp :
+// infixall.cpp :
 //
 // The program evaluates a given infix expression which is fully parenthesized.
 // It uses Dijkstra's two-stack algorithm. For simplicity of coding, however,
@@ -29,27 +30,27 @@ using namespace std;
 #include <vector>
 template <typename T>
 struct stack {
-    vector<T> item;
+	vector<T> item;
 
-    bool empty() const {
-        return item.empty();
-    }
-    auto size() const {
-        return item.size();
-    }
-    void push(T const& data) {
-        item.push_back(data);
-    }
-    void pop() {
-        if (item.empty())
-            throw out_of_range("stack<>::pop(): pop stack");
-        item.pop_back();
-    }
-    T top() const {
-        if (item.empty())
-            throw out_of_range("stack<>::top(): top stack");
-        return item.back();
-    }
+	bool empty() const {
+		return item.empty();
+	}
+	auto size() const {
+		return item.size();
+	}
+	void push(T const& data) {
+		item.push_back(data);
+	}
+	void pop() {
+		if (item.empty())
+			throw out_of_range("stack<>::pop(): pop stack");
+		item.pop_back();
+	}
+	T top() const {
+		if (item.empty())
+			throw out_of_range("stack<>::top(): top stack");
+		return item.back();
+	}
 };
 #else /////////////////////////// using STL stack //////////////////////////
 #include <stack>
@@ -171,6 +172,7 @@ double evaluate(string tokens)
 				k++;
 			}
 		}
+
 		else if (tokens[i] == '(')
 		{
 			op_stack.push(tokens[i]);
@@ -179,12 +181,6 @@ double evaluate(string tokens)
 
 		else if (tokens[i] == ')')
 		{ // compute it, push the result to va_stack
-			// do
-			// {
-			//     value = compute(va_stack, op_stack);
-			//     va_stack.push(value);
-			// } while (op_stack.top() == '(');
-			// op_stack.pop();
 			int t = op_stack.size();
 			for (int i = 0; i < t; i++)
 			{
@@ -199,6 +195,7 @@ double evaluate(string tokens)
 
 			k = 1;
 		}
+
 		else
 		{ // token is an operator; push it to op_stack.
 			if (op_stack.empty() || op_stack.top() == '(')
@@ -208,7 +205,7 @@ double evaluate(string tokens)
 			}
 			else
 			{
-				if (precedence(tokens[i]) >= precedence(op_stack.top()))
+				if (precedence(tokens[i]) > precedence(op_stack.top()))
 				{
 					op_stack.push(tokens[i]);
 				}
@@ -273,6 +270,7 @@ double evaluate(string tokens)
 			break;
 		}
 	}
+
 	DPRINT(cout << "tokens exhausted: now, check two stacks:" << endl;);
 	DPRINT(printStack(va_stack); cout << endl;);
 	DPRINT(printStack(op_stack); cout << endl;);

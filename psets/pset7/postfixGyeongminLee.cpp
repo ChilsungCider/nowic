@@ -16,6 +16,7 @@
 #include <iostream>
 #include <stack>
 #include <cassert>
+#include <cmath>
 using namespace std;
 
 #ifdef DEBUG
@@ -26,9 +27,10 @@ using namespace std;
 
 // change the printStack to use template once you finish part 1 in step 1.
 // prints the stack contents from the bottom.
-void printStack(stack<string> orig)
+template <typename T>
+void printStack(stack<T> orig)
 {
-	stack<string> temp;
+	stack<T> temp;
 	if (orig.empty())
 		return;
 	else
@@ -58,7 +60,7 @@ string evaluate(string tokens)
 		DPRINT(cout << "token: " << token << endl;);
 
 		// current token is a value(or operand), push it to st.
-		if (token == '+' || token == '-' || token == '*' || token == '/')
+		if (token == '+' || token == '-' || token == '*' || token == '/' || token == '^')
 		{
 			assert(st.size() >= 2);
 			string temp1 = st.top();
@@ -98,7 +100,7 @@ bool is_numeric(string tokens)
 
 	for (char token : tokens)
 	{
-		if (token == '+' || token == '-' || token == '*' || token == '-' || token == ' ')
+		if (token == '+' || token == '-' || token == '*' || token == '-' || token == ' ' || token == '^')
 			return true;
 		else if ('0' <= token && token <= '9')
 			return true;
@@ -121,7 +123,7 @@ double evaluate_numeric(string tokens)
 		DPRINT(cout << "token: " << token << endl;);
 
 		// if token is a operator, evaluate; if a digit(or operand), push it to st.
-		if (token == '+' || token == '-' || token == '*' || token == '/')
+		if (token == '+' || token == '-' || token == '*' || token == '/' || token == '^')
 		{
 			// checking the stack top() for right operand
 			// checking the stack top() for left oprand
@@ -159,6 +161,14 @@ double evaluate_numeric(string tokens)
 				st.pop();
 				st.push(temp2 / temp1);
 			}
+			else if (token == '^')
+			{
+				double temp1 = st.top();
+				st.pop();
+				double temp2 = st.top();
+				st.pop();
+				st.push(pow(temp2, temp1));
+			}
 		}
 		else
 		{ // push the operand (digit) in a value to the stack
@@ -168,7 +178,7 @@ double evaluate_numeric(string tokens)
 	}
 
 	DPRINT(cout << "token exhausted: check the stack, its size() should be 1.\n";);
-	DPRINT(printStack(st););
+	DPRINT(printStack(st));
 
 	double expr = 0;
 	expr = st.top();

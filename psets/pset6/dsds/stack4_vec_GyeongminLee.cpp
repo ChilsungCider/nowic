@@ -31,7 +31,7 @@ bool empty(stack s)
 
 void pop(stack s)
 {
-	s->item.pop_back(); // 벡터 맨 뒤 원소 삭제
+	s->item.pop_back();
 }
 
 void push(stack s, string item)

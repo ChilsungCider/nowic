@@ -375,7 +375,7 @@ void show(pNode p, bool all, int show_n)
 	}
 
 	// print the first show_n items
-	// cout << "your code here \n";
+	// cout <\< "your code here n";
 	curr = p;
 	for (int i = 0; i < N - show_n; i++)
 	{
